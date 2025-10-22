@@ -140,7 +140,6 @@ class ObjectPool<T>
 	{
 		#if debug
 		assert(!mSet.has(obj), 'object $obj was returned twice to the pool');
-		mSet.set(obj);
 		#end
 		
 		if (size == maxSize)
@@ -149,6 +148,9 @@ class ObjectPool<T>
 		{
 			if (size == mCapacity) resize();
 			mPool.set(size++, obj);
+			#if debug
+			mSet.set(obj);
+			#end
 		}
 	}
 	
